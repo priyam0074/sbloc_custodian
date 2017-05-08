@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="row loan-list">
+        <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Loan Listing</h3>
+               </div>
+               <div class="panel-body app-panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Loan Number</th>
+                                    <th ng-if="$ctrl.currentUserRole === 'financialAdvisor'">Borrower ID</th>
+                                    <th>Loan Status</th>
+                                    <th>Outstanding</th>
+                                    <th>Approved Loan Amount</th>
+                                    <!-- <th>Margin Call Amt.</th>
+                                    <th>Margin Call Due Date</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="loan in $ctrl.loanList" ng-class="{'danger': (!loan.isActive && loan.status ==='approved')}">
+                                    <td><a id="link-3" ng-click="$ctrl.navigateToLoanDetails(loan.id)">{{loan.id}}</a></td>
+                                    <td ng-if="$ctrl.currentUserRole === 'financialAdvisor'">
+                                      {{loan.borrower[0].id}}
+                                    </td>
+                                    <td>
+                                      <span>{{ (!loan.isActive && loan.status =='approved') ? 'Frozen' : loan.status }}</span>
+                                    </td>
+                                    <td>{{loan.outstanding}}</td>
+                                    <td>
+                                      <span>{{ (!loan.isActive && loan.status =='approved') ? 'NA' : loan.amountAvailableToBorrow }}</span>
+                                    </td>
+                                    <!-- <td>{{loan.marginCallAmount}}</td>
+                                    <td>{{loan.marginCallDueDate}}</td> -->
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+               </div>
+            </div>                     
+        </div>
+       <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12" ng-if="$ctrl.currentUserRole === 'custodian'">
+            <!-- <div class="row">
+                <div ng-class="$ctrl.showSecurityMessage ? 'text-success' : 'text-danger'">
+                   {{$ctrl.securityUpdateMessage}}
+                </div>
+            </div> -->
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Loan Securities</h3>
+               </div>
+               <div class="panel-body app-panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Security ID</th>
+                                    <th>Security Name</th>
+                                    <th>Security Existing Price</th>
+                                    <th>New Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="security in $ctrl.securitiesList">
+                                    
+                                    <td>
+                                      {{security.id}}
+                                    </td>
+                                    <td>
+                                      <span>{{ security.name}}</span>
+                                    </td>
+                                    <td>
+                                      {{security.price}}
+                                    </td>
+                                    <td>
+                                      <input type="text" ng-model="security.newPrice"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <div class="pull-right">
+                            <button class="btn btn-success" type="button" ng-click="$ctrl.updateSecurityPrice()">Update</button>
+                        </div>
+                        
+                    </div>
+               </div>
+            </div>                     
+        </div> 
+
+        <!-- <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Lorem Ipsum</h3>
+               </div>
+               <div class="panel-body app-panel-body"></div>
+            </div>           
+        </div> 
+        <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Lorem Ipsum</h3>
+               </div>
+               <div class="panel-body app-panel-body"></div>
+            </div>          
+        </div> 
+        <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
+            <div class="panel panel-primary">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Lorem Ipsum</h3>
+               </div>
+               <div class="panel-body app-panel-body"></div>
+            </div>           
+        </div>  -->
+    </div>
+</div>
+
+
+
+
